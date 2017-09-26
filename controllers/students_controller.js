@@ -83,14 +83,28 @@ router.get('/:id/edit', (request, response) => {
 
 })
 
-// DELETE route
+// DELETE route WITH A LINK
 router.get('/:id/delete', (request, response) => {
 
     const studentId = request.params.id
 
-    StudentModel.findOneAndRemove(studentId)
+    StudentModel.findByIdAndRemove(studentId)
         .then((student) => {
-            response.send('You deleted it!')
+            response.redirect('/students')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+})
+
+// DELETE route WITH A BUTTON
+router.delete('/:id', (request, response) => {
+
+    const studentId = request.params.id
+
+    StudentModel.findByIdAndRemove(studentId)
+        .then((student) => {
+            response.redirect('/students')
         })
         .catch((error) => {
             console.log(error)
@@ -146,6 +160,5 @@ router.put('/:id', (request, response) => {
             console.log(error)
         })
 })
-
 
 module.exports = router
