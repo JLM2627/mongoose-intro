@@ -86,10 +86,17 @@ router.get('/:id/edit', (request, response) => {
 // DELETE route WITH A LINK
 router.get('/:id/delete', (request, response) => {
 
+    // Grab the student ID from the parameters
+    // for the SINGLE student that we are deleting
     const studentId = request.params.id
 
+    // use the StudentModel to find the student document
+    // by ID that we want to delete and then delete it
     StudentModel.findByIdAndRemove(studentId)
         .then((student) => {
+            
+            // THEN redirect back to the Students INDEX
+            // to show all students
             response.redirect('/students')
         })
         .catch((error) => {
@@ -100,10 +107,17 @@ router.get('/:id/delete', (request, response) => {
 // DELETE route WITH A BUTTON
 router.delete('/:id', (request, response) => {
 
+    // Grab the student ID from the parameters
+    // for the SINGLE student that we are deleting
     const studentId = request.params.id
 
+    // use the StudentModel to find the student document
+    // by ID that we want to delete and then delete it
     StudentModel.findByIdAndRemove(studentId)
         .then((student) => {
+
+            // THEN redirect back to the Students INDEX
+            // to show all students
             response.redirect('/students')
         })
         .catch((error) => {
